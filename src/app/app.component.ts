@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { Geolocation, StatusBar, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -17,6 +17,13 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      Geolocation.getCurrentPosition().then(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      });
+      let watch = Geolocation.watchPosition().subscribe(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+        
+      });
     });
   }
 }
