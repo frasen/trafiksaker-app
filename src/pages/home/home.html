@@ -1,20 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Hem</ion-title>
+    <ion-title>Trafiksäker</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <h2>Välkommen till Trafiksäker!</h2>
-
-  <h3>Current Latitude: {{locationTracker.lat}}</h3>
-  <h3>Current Longitude: {{locationTracker.lng}}</h3>
-  <button ion-button full primary (click)="start()">
-    Start Tracking
+  <h3>Latitude: {{locationTracker.lat}}</h3>
+  <h3>Longitude: {{locationTracker.lng}}</h3>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <button *ngIf="this.active == false " ion-button full primary (click)="start()"  >
+    Starta
   </button>
-  <button ion-button full primary (click)="stop()">
-    Stop Tracking
+  <button *ngIf="this.active == true" ion-button full primary (click)="stop()">
+    Stoppa
   </button>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <p>Tryck på starta för att sätta igång appen. Den körs i bakgrunden och varnar vid en olycksdrabbad sträcka. </p>
   <button ion-button block (click)="playSound()">
      Spela ljud
   </button>
