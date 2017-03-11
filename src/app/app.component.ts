@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { SQLite, Geolocation, StatusBar, Splashscreen, MediaPlugin } from 'ionic-native';
+import { NativeAudio, SQLite, Geolocation, StatusBar, Splashscreen, MediaPlugin } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -10,13 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
   rootPage = TabsPage;
-  mySound = "Hellllloooo";
 
-  playSound = function() {
-    console.log("Playing sound");
-  }
-
-  henrik : "Developer";
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -27,28 +21,11 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-
-      /* Geo test */
-      Geolocation.getCurrentPosition().then(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      NativeAudio.preloadSimple('uniqueId1', 'farlig-korsning-inbyggt-mic.m4a').then(function(){
+        console.log("Sound loaded")
+      }, function() {
+        console.log("Sound not loaded")
       });
-      let watch = Geolocation.watchPosition().subscribe(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
-
-      });
-
-      // Create a MediaPlugin instance.  Expects path to file or url as argument
-      // We can optionally pass a second argument to track the status of the media
-
-      const onStatusUpdate = (status) => console.log(status);
-
-      const file = new MediaPlugin('resources/sounds/farlig-korsning-snowball.m4a', onStatusUpdate);
-
-      // Catch the Success & Error Output
-      // Platform Quirks
-      // iOS calls success on completion of playback only
-      // Android calls success on completion of playback AND on release()
-
 
 
       /* sqlite test (javascript, not Typescript) */
