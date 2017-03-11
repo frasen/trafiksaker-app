@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { LocationTracker } from '../providers/location-tracker';
+import { TrafikData } from '../providers/trafik-data';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,6 @@ import { LocationTracker } from '../providers/location-tracker';
     HomePage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, LocationTracker]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, LocationTracker, TrafikData]
 })
 export class AppModule {}
