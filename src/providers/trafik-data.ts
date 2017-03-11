@@ -16,7 +16,6 @@ export class TrafikData {
 
   constructor(public http: Http) {
     console.log('Hello TrafikData Provider');
-    this.data = ""
   }
 
   public load() {
