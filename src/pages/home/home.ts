@@ -18,11 +18,9 @@ export class HomePage {
   public myTrafikData;
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTracker, myTrafikData: TrafikData) {
-
     this.myTrafikData = myTrafikData;
-      this.old_lat = 0;
-      this.old_lng = 0;
-
+    this.old_lat = 0;
+    this.old_lng = 0;
   }
 
   playSound(){
