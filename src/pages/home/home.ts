@@ -22,20 +22,6 @@ export class HomePage {
     this.myTrafikData = myTrafikData;
       this.old_lat = 0;
       this.old_lng = 0;
-      // TODO: Change these to use real data
-      let gps1 = {x: 6782644, y: 599140}
-      let gps2 = {x: 6782645, y: 599140}
-      let elapsed_time = 15;
-
-      [1, 2, 3, 4, 5].forEach(() => {
-        let result = myTrafikData.search(gps1, gps2, elapsed_time)
-        if (result) {
-          console.log("This is a potential boom!");
-        }
-        else {
-          console.log("This is a not boom!");
-        }
-      })
 
   }
 

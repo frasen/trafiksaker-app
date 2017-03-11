@@ -12,11 +12,8 @@ interface IPoint {
 @Injectable()
 export class TrafikData {
 
-  public data;
+  public data = [];
   public dataLoaded;
-
-  public LAST_NOTICATION = null;
-  public NOTICATION_DELAY = 5 * 60; // seconds
 
   constructor(public http: Http) {
     console.log('Hello TrafikData Provider');
@@ -29,8 +26,10 @@ export class TrafikData {
         var path: string = cordova.file.applicationDirectory + "www/"
         File.readAsText(path, 'data.json')
           .then(function(result) {
-            let data = JSON.stringify(result)
-            that.data = data;
+            let data = JSON.parse(result as string)
+            //console.log(result);
+            //console.log(data);
+            that.data = (data as Array<any>);
             that.dataLoaded = true;
             resolve(data);
           })
@@ -40,23 +39,9 @@ export class TrafikData {
   }
 
   public search(gps1: IPoint, gps2: IPoint, elapsed_time: number) {
-    if(!this.dataLoaded) {
-      console.log("Data not loaded")
-      return false;
+    if(this.dataLoaded) {
+      return this.queryBoomRank(gps1, gps2, elapsed_time)
     }
-
-    // Current number of seconds since 1970-01-01
-    let now = (new Date()).getTime() / 1000
-
-    if (this.LAST_NOTICATION && now < this.LAST_NOTICATION + this.NOTICATION_DELAY) {
-      console.log("Chickening out")
-      return false
-    }
-
-    this.LAST_NOTICATION = now
-
-    console.log("Calling the boom!")
-    return this.queryBoomRank(gps1, gps2, elapsed_time)
   }
 
   // With an accident at {x: 6782646, y: 599140}, all these four calls should return true
