@@ -1,1 +1,18 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Hem</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>Välkommen till Trafiksäker!</h2>
+
+  <button ion-button block onclick="this.playSound()">
+     Testa ljudet
+  </button>
+  <hr>
+   <button ion-button block >
+     Starta
+  </button>
+  {{this.henrik}}
+</ion-content>

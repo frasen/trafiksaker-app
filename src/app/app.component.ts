@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { SQLite, Geolocation, StatusBar, Splashscreen } from 'ionic-native';
+import { SQLite, Geolocation, StatusBar, Splashscreen, MediaPlugin } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -10,6 +10,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
   rootPage = TabsPage;
+  mySound = "Hellllloooo";
+
+  playSound = function() {
+    console.log("Playing sound");
+  }
+
+  henrik : "Developer";
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -30,6 +37,19 @@ export class MyApp {
 
       });
 
+      // Create a MediaPlugin instance.  Expects path to file or url as argument
+      // We can optionally pass a second argument to track the status of the media
+
+      const onStatusUpdate = (status) => console.log(status);
+
+      const file = new MediaPlugin('resources/sounds/farlig-korsning-snowball.m4a', onStatusUpdate);
+
+      // Catch the Success & Error Output
+      // Platform Quirks
+      // iOS calls success on completion of playback only
+      // Android calls success on completion of playback AND on release()
+
+
 
       /* sqlite test (javascript, not Typescript) */
       let db = new SQLite();
@@ -38,7 +58,7 @@ export class MyApp {
         location: 'default' // the location field is required
       }).then(() => {
         db.executeSql('select * from developers', {}).then(() => {
-           
+
         }, (err) => {
           console.error('Unable to execute sql: ', err);
         });
