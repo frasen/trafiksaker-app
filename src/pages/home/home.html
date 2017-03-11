@@ -5,24 +5,24 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Latitude: {{locationTracker.lat}}</h3>
-  <h3>Longitude: {{locationTracker.lng}}</h3>
+  <p>Trafiksäker varnar dig när du närmar dig ett område med
+  där det skett många trafikolyckor.</p>
+  <button ion-button block (click)="playSound()">
+     Testa ljudvolymen
+  </button>
+
   <div>&nbsp;</div>
-  <div>&nbsp;</div>
-  <div>&nbsp;</div>
-  <div>&nbsp;</div>
+  <p>Appen körs i bakgrunden och varnar när det behövs. Redo att starta?</p>
   <button *ngIf="this.active == false " ion-button full primary (click)="start()"  >
     Starta
   </button>
   <button *ngIf="this.active == true" ion-button full primary (click)="stop()">
     Stoppa
   </button>
+
   <div>&nbsp;</div>
   <div>&nbsp;</div>
-  <div>&nbsp;</div>
-  <div>&nbsp;</div>
-  <p>Tryck på starta för att sätta igång appen. Den körs i bakgrunden och varnar vid en olycksdrabbad sträcka. </p>
-  <button ion-button block (click)="playSound()">
-     Spela ljud
-  </button>
+  <p>DEBUG: Du är just nu här:</p>
+  <h3>Latitude: {{locationTracker.lat}}</h3>
+  <h3>Longitude: {{locationTracker.lng}}</h3>
 </ion-content>
