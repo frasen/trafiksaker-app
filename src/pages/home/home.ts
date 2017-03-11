@@ -20,18 +20,12 @@ export class HomePage {
 
       this.old_lat = 0;
       this.old_lng = 0;
-      // Load data from file into memory
-      console.log("Loading trafikdata...");
-      myTrafikData.load().then((_) => {
-        console.log("Loading complete.");
+      // TODO: Change these to use real data
+      let gps1 = {x: 6782644, y: 599140}
+      let gps2 = {x: 6782645, y: 599140}
+      let elapsed_time = 15
 
-        // TODO: Change these to use real data
-        let gps1 = {x: 6782644, y: 599140}
-        let gps2 = {x: 6782645, y: 599140}
-        let elapsed_time = 15
-
-        console.log("Is this a potential boom?", myTrafikData.search(gps1, gps2, elapsed_time));
-      });
+      console.log("Is this a potential boom?", myTrafikData.search(gps1, gps2, elapsed_time));
 
   }
 
@@ -48,17 +42,17 @@ export class HomePage {
   start(){
     this.locationTracker.startTracking();
     this.active = true;
-    while(this.active) {
-      this.sleep(1000);
-      console.log("Running BoomRank")
-      let lat = this.locationTracker.lat;
-      let lng = this.locationTracker.lng;
-      console.log("Lat: " + lat + " Lng: " + lng);
-      console.log("Lat: " + this.old_lat + " Lng: " + this.old_lng);
-
-      this.old_lat = lat;
-      this.old_lng = lat;
-    }
+    // while(this.active) {
+    //   this.sleep(1000);
+    //   console.log("Running BoomRank")
+    //   let lat = this.locationTracker.lat;
+    //   let lng = this.locationTracker.lng;
+    //   console.log("Lat: " + lat + " Lng: " + lng);
+    //   console.log("Lat: " + this.old_lat + " Lng: " + this.old_lng);
+    //
+    //   this.old_lat = lat;
+    //   this.old_lng = lat;
+    // }
   }
 
   stop(){

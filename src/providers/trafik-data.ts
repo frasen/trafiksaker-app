@@ -13,9 +13,11 @@ interface IPoint {
 export class TrafikData {
 
   public data;
+  public dataLoaded;
 
   constructor(public http: Http) {
     console.log('Hello TrafikData Provider');
+    this.dataLoaded = false;
   }
 
   public load() {
@@ -26,6 +28,7 @@ export class TrafikData {
           .then(function(result) {
             let data = JSON.stringify(result)
             that.data = data;
+            that.dataLoaded = true;
             resolve(data);
           })
           .catch(err => console.log('boooh'));
@@ -34,7 +37,9 @@ export class TrafikData {
   }
 
   public search(gps1: IPoint, gps2: IPoint, elapsed_time: number) {
-    return this.queryBoomRank(gps1, gps2, elapsed_time)
+    if(this.dataLoaded) {
+      return this.queryBoomRank(gps1, gps2, elapsed_time)
+    }
   }
 
   // With an accident at {x: 6782646, y: 599140}, all these four calls should return true
