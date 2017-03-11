@@ -14,10 +14,12 @@ export class HomePage {
 
   public old_lat: number;
   public old_lng: number;
-  public active = true;
+  public active = false;
+  public myTrafikData;
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTracker, myTrafikData: TrafikData) {
 
+    this.myTrafikData = myTrafikData;
       this.old_lat = 0;
       this.old_lng = 0;
       // TODO: Change these to use real data
@@ -50,17 +52,31 @@ export class HomePage {
   start(){
     this.locationTracker.startTracking();
     this.active = true;
-    // while(this.active) {
-    //   this.sleep(1000);
-    //   console.log("Running BoomRank")
-    //   let lat = this.locationTracker.lat;
-    //   let lng = this.locationTracker.lng;
-    //   console.log("Lat: " + lat + " Lng: " + lng);
-    //   console.log("Lat: " + this.old_lat + " Lng: " + this.old_lng);
-    //
-    //   this.old_lat = lat;
-    //   this.old_lng = lat;
-    // }
+    this.callBoomRank();
+  }
+
+  callBoomRank() {
+    console.log("Calling BoomRank")
+    let lat = this.locationTracker.lat;
+    let lng = this.locationTracker.lng;
+
+    let gps1 = {x: lat, y: lng}
+    let gps2 = {x: this.old_lat, y: this.old_lng}
+
+    this.old_lat = lat;
+    this.old_lng = lng;
+
+    let milliseconds = 2000;
+    console.log("Calling BoomRank. Lat: " + lat + " Lng: " + lng + "Old Lat: " + this.old_lat + " Old Lng: " + this.old_lng + "  Seconds: " + milliseconds)
+
+    let shouldWePlaySound = this.myTrafikData.search(gps1, gps2, milliseconds);
+    if(shouldWePlaySound) {
+      this.playSound();
+    }
+
+    if(this.active) {
+      setTimeout(() => this.callBoomRank(), milliseconds);
+    }
   }
 
   stop(){
