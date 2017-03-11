@@ -37,10 +37,10 @@ export class MyApp {
         db.executeSql('select * from developers', {}).then(() => {
 
         }, (err) => {
-          console.error('Unable to execute sql: ', err);
+          console.error('Unable to execute sql: ', JSON.stringify(err));
         });
       }, (err) => {
-        console.error('Unable to open database: ', err);
+        console.error('Unable to open database: ', JSON.stringify(err));
       });
 
     });
