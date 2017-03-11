@@ -6,21 +6,26 @@ import { NativeAudio} from 'ionic-native';
 import { LocationTracker } from '../../providers/location-tracker';
 import { TrafikData } from '../../providers/trafik-data';
 
+import proj4 from 'proj4';
+
+// EPSG:3006
+proj4.defs([['SWEREF99TM', '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs']]);
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  public old_lat: number;
-  public old_lng: number;
+  public old_x: number;
+  public old_y: number;
   public active = false;
   public myTrafikData;
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTracker, myTrafikData: TrafikData) {
     this.myTrafikData = myTrafikData;
-    this.old_lat = 0;
-    this.old_lng = 0;
+    this.old_x = 0;
+    this.old_y = 0;
   }
 
   playSound(){
@@ -43,23 +48,31 @@ export class HomePage {
     console.log("Calling BoomRank")
     let lat = this.locationTracker.lat;
     let lng = this.locationTracker.lng;
+    let seconds = 2;
 
-    let gps1 = {x: lat, y: lng}
-    let gps2 = {x: this.old_lat, y: this.old_lng}
+    if (lat != 0 && lng != 0) {
+      let result = proj4("WGS84", "SWEREF99TM", [lng, lat])
+      let y = result[0]
+      let x = result[1]
 
-    this.old_lat = lat;
-    this.old_lng = lng;
+      console.log("proj4: Raw coordinates: ", [lng, lat], ", Converted: ", y, x)
 
-    let milliseconds = 2000;
-    console.log("Calling BoomRank. Lat: " + lat + " Lng: " + lng + "Old Lat: " + this.old_lat + " Old Lng: " + this.old_lng + "  Seconds: " + milliseconds)
+      let gps1 = {x: this.old_x, y: this.old_y}
+      let gps2 = {x: y, y: x}
 
-    let shouldWePlaySound = this.myTrafikData.search(gps1, gps2, milliseconds);
-    if(shouldWePlaySound) {
-      this.playSound();
+      this.old_x = x;
+      this.old_y = y;
+
+      console.log("Calling BoomRank. x: " + x + " y: " + y + "Old x: " + this.old_x + " Old y: " + this.old_y + "  Seconds: " + seconds)
+
+      let shouldWePlaySound = this.myTrafikData.search(gps1, gps2, seconds);
+      if(shouldWePlaySound) {
+        this.playSound();
+      }
     }
 
     if(this.active) {
-      setTimeout(() => this.callBoomRank(), milliseconds);
+      setTimeout(() => this.callBoomRank(), seconds * 1000);
     }
   }
 
