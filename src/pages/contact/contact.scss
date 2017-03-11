@@ -1,3 +1,13 @@
 page-contact {
 
+  .photo {
+    height: 150px;
+    width: 150px;
+    -moz-border-radius: 500px;
+    -webkit-border-radius: 500px;
+    border-radius: 500px;
+    -moz-animation: appear 1s;
+    -webkit-animation: appear 1s;
+    animation: appear 1s;
+  }
 }
