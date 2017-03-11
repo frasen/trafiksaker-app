@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { NativeAudio, SQLite, Geolocation, StatusBar, Splashscreen, MediaPlugin } from 'ionic-native';
+import { NativeAudio, SQLite, StatusBar, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
