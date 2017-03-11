@@ -22,11 +22,15 @@ export class HomePage {
       this.old_lng = 0;
       // Load data from file into memory
       console.log("Loading trafikdata...");
-      myTrafikData.load().then((data) => {
+      myTrafikData.load().then((_) => {
         console.log("Loading complete.");
-        console.log("Searching for Trafikelement4: " + myTrafikData.search("Trafikelement4"));
-        console.log("Searching for Trafikelement44: " + myTrafikData.search("Trafikelement44"));
-        console.log("Searching for Elefant: " + myTrafikData.search("Elefant"));
+
+        // TODO: Change these to use real data
+        let gps1 = {x: 6782644, y: 599140}
+        let gps2 = {x: 6782645, y: 599140}
+        let elapsed_time = 15
+
+        console.log("Is this a potential boom?", myTrafikData.search(gps1, gps2, elapsed_time));
       });
 
   }
