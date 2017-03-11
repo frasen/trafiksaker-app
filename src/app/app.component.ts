@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { NativeAudio, StatusBar, Splashscreen, File, BackgroundMode} from 'ionic-native';
+import { NativeAudio, StatusBar, Splashscreen, BackgroundMode} from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { TrafikData } from '../providers/trafik-data';
-import { LocationTracker } from '../providers/location-tracker';
 
 @Component({
   templateUrl: 'app.html'
