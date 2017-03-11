@@ -68,7 +68,8 @@ export class LocationTracker {
   stopTracking() {
 
       console.log('stopTracking');
-
+      this.lat = 0;
+      this.lng = 0;
      BackgroundGeolocation.finish();
      this.watch.unsubscribe();
 
