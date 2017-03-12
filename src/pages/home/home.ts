@@ -63,7 +63,7 @@ export class HomePage {
       this.old_x = x;
       this.old_y = y;
 
-      console.log("Calling BoomRank. x: " + x + " y: " + y + "Old x: " + this.old_x + " Old y: " + this.old_y + "  Seconds: " + seconds)
+      console.log("Calling BoomRank. x: " + x + " y: " + y + ", Old x: " + this.old_x + " Old y: " + this.old_y + "  Seconds: " + seconds)
 
       let shouldWePlaySound = this.myTrafikData.search(gps1, gps2, seconds);
       if(shouldWePlaySound) {

@@ -14,16 +14,16 @@
 
   <div>&nbsp;</div>
   <p>Appen körs i bakgrunden och varnar när det behövs. Redo att starta?</p>
-  <button *ngIf="this.active == false " ion-button full primary (click)="start()"  >
+  <button *ngIf="this.active == false " ion-button full color="primary" (click)="start()"  >
     Starta
   </button>
-  <button *ngIf="this.active == true" ion-button full primary (click)="stop()">
+  <button *ngIf="this.active == true" ion-button full color="primary" (click)="stop()">
     Stoppa
   </button>
 
   <div>&nbsp;</div>
   <div>&nbsp;</div>
-  <p>DEBUG: Du är just nu här:</p>
+  <p>Din position:</p>
   <h3>Latitude: {{locationTracker.lat}}</h3>
   <h3>Longitude: {{locationTracker.lng}}</h3>
 </ion-content>
